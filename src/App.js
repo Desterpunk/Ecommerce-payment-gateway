@@ -1,9 +1,10 @@
+import Navbar from "./components/Navbar";
 import Product from "./components/Product";
 
 function App() {
   return (
     <div className="App">
-      <h1>Cleaning...</h1>
+      <Navbar></Navbar>
       <Product></Product>
     </div>
   );
