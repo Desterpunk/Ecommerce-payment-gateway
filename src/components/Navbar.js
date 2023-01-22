@@ -8,11 +8,17 @@ import IconButton from '@material-ui/core/IconButton';
 import Icon from '../assets/ecommerce.png'
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import { Badge } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        marginBottom: "7rem",
+        marginBottom: "5rem",
+    },
+    center: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     appBar: {
         backgroundColor: "whitesmoke",
@@ -20,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
     },
     grow: {
         flexGrow: 1,
-    },
-    button: {
-        marginLeft: theme.spacing(2),
     },
     image: {
         marginRight: "10px",
@@ -35,27 +38,38 @@ function Navbar() {
 
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" className={classes.appBar}>
+            <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <img src={Icon} alt='Icon' className={classes.image} />
-                    </IconButton>
-                    <div className={classes.grow}></div>
-                    <Typography variant="h6" color='textPrimary' component="p">
-                        Hello Guest
-                    </Typography>
-                    <div className={classes.button}>
-                        <Button variant='outlined'>
-                            <strong>Sign In</strong>
-                        </Button>
-                        <IconButton aria-label='show carts items' color='inherit'>
-                            <Badge badgeContent={2} color="secondary">
-                                <ShoppingCart fontSize='large' color='primary'></ShoppingCart>
-                            </Badge>
-                        </IconButton>
-                    </div>
+                    <Grid container>
+                        <Grid item xs={12} sm={3} md={3} className={classes.center}>
+                            <IconButton edge="start" color="inherit" aria-label="menu" >
+                                <img src={Icon} alt='Icon' className={classes.image} />
+                            </IconButton>
+                        </Grid>
+                        <Grid item xs={12} sm={4} md={4}>
+                            <div></div>
+                        </Grid>
+                        <Grid item xs={12} sm={2} md={2} className={classes.center}>
+                            <Typography variant="h6" color='textPrimary' component="p">
+                                Hello Guest
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={6} sm={2} md={2} className={classes.center}>
+                            <Button variant='outlined'>
+                                <strong>Sign In</strong>
+                            </Button>
+                        </Grid>
+                        <Grid item xs={6} sm={1} md={1} className={classes.center}>
+                            <IconButton aria-label='show carts items' color='inherit'>
+                                <Badge badgeContent={2} color="secondary">
+                                    <ShoppingCart fontSize='large' color='primary'></ShoppingCart>
+                                </Badge>
+                            </IconButton>
+                        </Grid>
+                    </Grid>
                 </Toolbar>
             </AppBar>
+
         </div>
     )
 }
