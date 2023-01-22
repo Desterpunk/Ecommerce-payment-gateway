@@ -1,11 +1,12 @@
+import CheackoutPage from "./components/CheackoutPage";
 import Navbar from "./components/Navbar";
-import Products from "./components/Products";
+// import Products from "./components/Products";
 
 function App() {
   return (
     <div className="App">
         <Navbar></Navbar>
-        <Products></Products>
+        <CheackoutPage></CheackoutPage>
     </div>
   );
 }
