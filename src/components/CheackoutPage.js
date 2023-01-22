@@ -25,7 +25,7 @@ const CheackoutPage = () => {
         return (
             <React.Fragment>
                 {productsData.map((item) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} spacing={3}>
+                    <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
                         <CheckoutCard key={item.id} product={item}/>
                     </Grid>
                 ))}

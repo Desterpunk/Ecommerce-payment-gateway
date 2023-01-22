@@ -72,7 +72,7 @@ function CheckoutCard({ product: { id, name, productType, image, price, rating, 
                             {Array(rating)
                                 .fill()
                                 .map((_, i) => (
-                                    <p>🌟</p>)
+                                    <p key={i}>🌟</p>)
                                 )}
                         </div>
                     </Grid>

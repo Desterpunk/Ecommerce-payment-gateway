@@ -9,6 +9,7 @@ import Icon from '../assets/ecommerce.png'
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import { Badge } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,8 +42,10 @@ function Navbar() {
                 <Toolbar>
                     <Grid container>
                         <Grid item xs={12} sm={3} md={3} className={classes.center}>
-                            <IconButton edge="start" color="inherit" aria-label="menu" >
-                                <img src={Icon} alt='Icon' className={classes.image} />
+                            <IconButton edge="start" color="inherit" aria-label="menu">
+                                <Link to="/">
+                                    <img src={Icon} alt='Icon' className={classes.image} />
+                                </Link>
                             </IconButton>
                         </Grid>
                         <Grid item xs={12} sm={4} md={4}>
@@ -59,11 +62,13 @@ function Navbar() {
                             </Button>
                         </Grid>
                         <Grid item xs={6} sm={1} md={1} className={classes.center}>
-                            <IconButton aria-label='show carts items' color='inherit'>
-                                <Badge badgeContent={2} color="secondary">
-                                    <ShoppingCart fontSize='large' color='primary'></ShoppingCart>
-                                </Badge>
-                            </IconButton>
+                            <Link to="/checkout">
+                                <IconButton aria-label='show carts items' color='inherit'>
+                                    <Badge badgeContent={2} color="secondary" overlap="rectangular">
+                                        <ShoppingCart fontSize='large' color='primary'></ShoppingCart>
+                                    </Badge>
+                                </IconButton>
+                            </Link>
                         </Grid>
                     </Grid>
                 </Toolbar>
