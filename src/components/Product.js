@@ -12,13 +12,17 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddShopingCart from "@material-ui/icons/AddShoppingCart";
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    height: 'auto',
   },
   action: {
-    marginTop: "1rem",
+    margin: "auto",
+    display: 'flex',
+    alignItems: 'center',
   },
   media: {
     height: 0,
@@ -34,9 +38,20 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(180deg)",
   },
+  gridContainer: {
+    alignItems: 'center',
+  },
+  divRating: {
+    display: 'flex',
+  },
+  center: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));
 
-function Product() {
+function Product({ product: { id, name, productType, image, price, rating, description } }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
 
@@ -46,54 +61,63 @@ function Product() {
 
   return (
     <Card className={classes.root}>
-      <CardHeader
+      <CardHeader variant={"h6"}
         action={
           <Typography
-            className={classes.action}
-            variant="h5"
-            color="textSecondary"
           >
-            {accounting.formatMoney(50, "$")}
+            {accounting.formatMoney(price, "$")}
           </Typography>
         }
-        title="Shoes"
+        classes={{ action: classes.action }}
+        className={classes.action}
+        title={name}
         subheader="in stock"
       ></CardHeader>
       <CardMedia
         className={classes.media}
-        image="https://s2.r29static.com/bin/entry/ebd/0,675,2000,1050/x,80/1929471/image.jpg"
-        title="Nike shoes"
+        image={image}
+        title={productType}
       ></CardMedia>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Running Shoes
+          {name}
         </Typography>
       </CardContent>
-      <CardActions>
-        <IconButton aria-label="add to shoping cart">
-          <AddShopingCart></AddShopingCart>
-        </IconButton>
-        {Array(4)
-          .fill()
-          .map((_, i) => (
-            <p>🌟</p>)
-          )}
-        <IconButton
-          aria-label="show more"
-          aria-expanded={expanded}
-          onClick={handleExpandClick}
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-        >
-          <ExpandMoreIcon></ExpandMoreIcon>
-        </IconButton>
+      <CardActions classes={classes.CardActions}>
+        <Grid container spacing={3} className={classes.gridContainer}>
+          <Grid item xs={3} sm={3} md={3} lg={3}  className={classes.center}>
+            <IconButton aria-label="add to shoping cart">
+              <AddShopingCart></AddShopingCart>
+            </IconButton>
+          </Grid>
+          <Grid item xs={6} sm={6} md={6} lg={6} className={classes.center}>
+            <div className={classes.divRating}>
+              {Array(rating)
+                .fill()
+                .map((_, i) => (
+                  <p>🌟</p>)
+                )}
+            </div>
+          </Grid>
+          <Grid item xs={3} sm={3} md={3} lg={3} className={classes.center}>
+            <IconButton 
+              aria-label="show more"
+              aria-expanded={expanded}
+              onClick={handleExpandClick}
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded,
+              })}
+            >
+              <ExpandMoreIcon></ExpandMoreIcon>
+            </IconButton>
+          </Grid >
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography paragraph>{description}</Typography>
+            </CardContent>
+          </Collapse>
+        </Grid>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Zapatillas de deporte para correr</Typography>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }

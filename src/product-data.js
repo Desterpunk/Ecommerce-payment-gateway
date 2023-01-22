@@ -1,4 +1,4 @@
-const products = [
+const productsData = [
     {
         id: 1,
         name: "Shoes",
@@ -14,8 +14,8 @@ const products = [
         productType: "Apple Mcbook",
         price: 1000,
         rating: 4,
-        image: "https://http2.mlstatic.com/D_NQ_NP_953866-MLA50968332322_082022-O.jpg"
-        description: "Apple MacBook Pro is a macOS laptop with a 13.30-inch display that has a resolution of 2560x1600 pixels."
+        image: "https://http2.mlstatic.com/D_NQ_NP_953866-MLA50968332322_082022-O.jpg",
+        description: "Apple MacBook Pro is a macOS laptop with a 13.30-inch display that has a resolution of 2560x1600 pixels.",
     },
     {
         id: 3,
@@ -23,8 +23,8 @@ const products = [
         productType: "L14dc19 Black Filter Coffee Machine",
         price: 28,
         rating: 3,
-        image: "https://http2.mlstatic.com/D_NQ_NP_953866-MLA50968332322_082022-O.jpg"
-        description: "Apple MacBook Pro is a macOS laptop with a 13.30-inch display that has a resolution of 2560x1600 pixels."
+        image: "https://www.delonghi.com/medias/eu-Category-Sort-automatic-coffee-magnifica-mob.jpg?context=bWFzdGVyfHJvb3R8MTA0NzczfGltYWdlL2pwZWd8aDg3L2g2Yy8xMzEzMjAyNDQ0NzAwNi9ldV9DYXRlZ29yeS1Tb3J0X2F1dG9tYXRpYy1jb2ZmZWVfbWFnbmlmaWNhX21vYi5qcGd8Yzc5NDc2YzQxYzk0YmY1YWQxMDhkNzUwM2VhMmU4NzE2MDk2NjM0ZmY5YWUxNmFiMGNjODVmMDE0Y2FjZGJhNA",
+        description: "Apple MacBook Pro is a macOS laptop with a 13.30-inch display that has a resolution of 2560x1600 pixels.",
     },
     {
         id: 4,
@@ -32,7 +32,9 @@ const products = [
         productType: "Xbox Christmas Sweater",
         price: 42,
         rating: 5,
-        image: "https://http2.mlstatic.com/D_NQ_NP_953866-MLA50968332322_082022-O.jpg"
-        description: "Apple MacBook Pro is a macOS laptop with a 13.30-inch display that has a resolution of 2560x1600 pixels."
+        image: "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1662744659-jkerther-women-s-y2k-print-sweater-v-neck-long-sleeve-cardigan-1662744648.jpg",
+        description: "Apple MacBook Pro is a macOS laptop with a 13.30-inch display that has a resolution of 2560x1600 pixels.",
     },
 ]
+
+export default productsData;
