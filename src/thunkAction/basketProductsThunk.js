@@ -20,3 +20,10 @@ export const deleteBasketProduct = createAsyncThunk(
         return id;
     }
 );
+
+export const setBasketProductTotal = createAsyncThunk(
+    'basketProducts/setBasketProductTotal',
+    async () => {
+        return;
+    }
+);

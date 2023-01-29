@@ -30,11 +30,11 @@ const useStyles = makeStyles((theme) => ({
     }
 
 }));
-const Products = ({ dispatch, loading, hasErrors, redirect, products }) => {
+const Products = ({ dispatch, loading, hasErrors, products }) => {
 
     useEffect(() => {
         dispatch(getProducts());
-    }, [redirect, dispatch]);
+    }, [dispatch]);
 
     const classes = useStyles();
 

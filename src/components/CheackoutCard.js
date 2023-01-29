@@ -45,7 +45,6 @@ function CheckoutCard({ product: { id, name, productType, image, price, rating, 
 
     const handleDeleteButton = (e) => {
         e.preventDefault();
-        console.log(id)
         dispatch(deleteBasketProduct(id))
     }
 

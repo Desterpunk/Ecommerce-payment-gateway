@@ -10,6 +10,7 @@ import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import { Badge } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         height: "2rem",
     },
 }));
-function Navbar() {
+function Navbar({products}) {
 
     const classes = useStyles();
 
@@ -64,7 +65,7 @@ function Navbar() {
                         <Grid item xs={6} sm={1} md={1} className={classes.center}>
                             <Link to="/checkout">
                                 <IconButton aria-label='show carts items' color='inherit'>
-                                    <Badge badgeContent={2} color="secondary" overlap="rectangular">
+                                    <Badge badgeContent={products.length} color="secondary" overlap="rectangular">
                                         <ShoppingCart fontSize='large' color='primary'></ShoppingCart>
                                     </Badge>
                                 </IconButton>
@@ -78,4 +79,11 @@ function Navbar() {
     )
 }
 
-export default Navbar
+const mapStateToProps = (state) => ({
+    products: state.basketProductsReducer.products,
+    loading: state.basketProductsReducer.loading,
+    hasErrors: state.basketProductsReducer.hasErrors,
+    redirect: state.basketProductsReducer.redirect,
+});
+
+export default connect(mapStateToProps)(Navbar);
