@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 export default configureStore({
     reducer: {
         productsReducer,
-        basketProductsReducer
+        basketProductsReducer,
     },
     middleware: (curryGetDefaultMiddleware) =>
         curryGetDefaultMiddleware().concat(thunk),

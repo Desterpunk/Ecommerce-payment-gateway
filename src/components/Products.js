@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Product from './Product';
-import { getProductsThunk } from '../thunkAction/productsThunk';
+import { getProducts } from '../thunkAction/productsThunk';
 import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 const Products = ({ dispatch, loading, hasErrors, redirect, products }) => {
 
     useEffect(() => {
-        dispatch(getProductsThunk());
+        dispatch(getProducts());
     }, [redirect, dispatch]);
 
     const classes = useStyles();

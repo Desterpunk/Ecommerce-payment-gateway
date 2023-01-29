@@ -1,18 +1,37 @@
-import * as actions from './basketProdcutsAction';
+import { createSlice } from "@reduxjs/toolkit";
+import { addBasketProduct, getBasketProducts } from "../../thunkAction/basketProductsThunk";
 
 export const initialState = {
     products: [],
 }
 
-export default function basketProductsReducer(state = initialState, action) {
-    switch (action.type) {
-        case actions.LOADING:
-            return { ...state, loading: true };
-        case actions.LOADED_SUCCESS:
-            return { ...state, ...action.payload, loading: false, hasErrors: false };
-        case actions.LOADED_FAILURE:
-            return { ...state, loading: false, hasErrors: true };
-        default:
-            return state;
+export const basketProductsReducer = createSlice({
+    name: 'basketProducts',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(getBasketProducts.fulfilled, (state, action) => {
+            state.loading = false;
+            state.error = null;
+            state.basketProducts = action.payload;
+        })
+        builder.addCase(getBasketProducts.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(getBasketProducts.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
+        builder.addCase(addBasketProduct.fulfilled, (state, action) => {
+            state.loading = false;
+            if (action.payload?.error) {
+                state.error = action.payload.error;
+                return;
+            }
+            state.error = null;
+            state.products = [...state.products, action.payload];
+        })
     }
-}
+})
+
+export default basketProductsReducer.reducer;

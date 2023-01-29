@@ -1,12 +1,15 @@
-import { loading, failure, success } from "../state/products/productsAction";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getBasketProductsThunk = () => {
-    return async (dispatch) => {
-      dispatch(loading());
-      try {
-        dispatch(success({ products:[] , redirect: null }));
-      } catch (error) {
-        dispatch(failure());
-      }
-    };
-  };
+export const getBasketProducts = createAsyncThunk(
+    'basketProducts/getBasketProducts',
+    async () => {
+        return [];
+    }
+);
+
+export const addBasketProduct = createAsyncThunk(
+    'basketProducts/addBasketProduct',
+    async (product) => {
+        return product;
+    }
+);

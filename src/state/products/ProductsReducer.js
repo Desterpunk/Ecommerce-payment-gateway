@@ -1,18 +1,30 @@
-import * as actions from './productsAction';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { getProducts } from '../../thunkAction/productsThunk';
+
 export const initialState = {
     products: [],
 };
 
 
-export default function productsReducer(state = initialState, action) {
-    switch (action.type) {
-        case actions.LOADING:
-            return { ...state, loading: true };
-        case actions.LOADED_SUCCESS:
-            return { ...state, ...action.payload, loading: false, hasErrors: false };
-        case actions.LOADED_FAILURE:
-            return { ...state, loading: false, hasErrors: true };
-        default:
-            return state;
+export const productsReducer = createSlice({
+    name: 'products',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(getProducts.fulfilled, (state, action) => {
+            state.loading = false;
+            state.error = null;
+            state.products = action.payload;
+        })
+        builder.addCase(getProducts.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(getProducts.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
     }
-}
+})
+
+export default productsReducer.reducer;
