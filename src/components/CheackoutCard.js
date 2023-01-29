@@ -10,6 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { connect } from "react-redux";
+import { deleteBasketProduct } from "../thunkAction/basketProductsThunk";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,8 +40,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function CheckoutCard({ product: { id, name, productType, image, price, rating, description } }) {
+function CheckoutCard({ product: { id, name, productType, image, price, rating, description }, dispatch }) {
     const classes = useStyles();
+
+    const handleDeleteButton = (e) => {
+        e.preventDefault();
+        console.log(id)
+        dispatch(deleteBasketProduct(id))
+    }
 
     return (
         <Card className={classes.root}>
@@ -81,6 +89,7 @@ function CheckoutCard({ product: { id, name, productType, image, price, rating, 
                     </Grid>
                     <Grid item xs={3} sm={3} md={3} lg={3} className={classes.center}>
                         <IconButton
+                            onClick={(e) => handleDeleteButton(e)}
                             aria-label="delete"
                         >
                             <DeleteIcon fontSize="large"> </DeleteIcon>
@@ -92,4 +101,10 @@ function CheckoutCard({ product: { id, name, productType, image, price, rating, 
     );
 }
 
-export default CheckoutCard;
+const mapStateToProps = (state) => ({
+    loading: state.basketProductsReducer.loading,
+    hasErrors: state.basketProductsReducer.hasErrors,
+    redirect: state.basketProductsReducer.redirect,
+});
+
+export default connect(mapStateToProps)(CheckoutCard);

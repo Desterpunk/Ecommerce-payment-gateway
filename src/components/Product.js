@@ -62,7 +62,8 @@ function Product({ product, dispatch }) {
     setExpanded(!expanded);
   };
 
-  const handleAddButton = () => {
+  const handleAddButton = (e) => {
+    e.preventDefault();
     dispatch(addBasketProduct(product));
   }
 

@@ -13,3 +13,10 @@ export const addBasketProduct = createAsyncThunk(
         return product;
     }
 );
+
+export const deleteBasketProduct = createAsyncThunk(
+    'basketProducts/deleteBasketProduct',
+    async (id) => {
+        return id;
+    }
+);
