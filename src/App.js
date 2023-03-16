@@ -8,6 +8,8 @@ import {
   Outlet,
 } from "react-router-dom";
 import NotFound from "./components/NotFound";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
 
 const AppLayout = () => (
   <>
@@ -29,6 +31,17 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <CheackoutPage />,
+        errorElement: <NotFound />
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+        errorElement: <NotFound />
+      }
+      ,
+      {
+        path: "/signin",
+        element: <SignIn />,
         errorElement: <NotFound />
       }
     ]

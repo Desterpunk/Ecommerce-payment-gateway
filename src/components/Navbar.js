@@ -9,8 +9,11 @@ import Icon from '../assets/ecommerce.png'
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import { Badge } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { auth } from '../environment/enviroment';
+import { setCurrentAccount } from '../thunkAction/userThunk';
+import { emptyBasketProduct } from '../thunkAction/basketProductsThunk';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         backgroundColor: "whitesmoke",
         boxShadow: "none",
+        position: 'absolute',
     },
     grow: {
         flexGrow: 1,
@@ -32,10 +36,28 @@ const useStyles = makeStyles((theme) => ({
         marginRight: "10px",
         height: "2rem",
     },
+    link: {
+        textDecoration: "none",
+    }
 }));
-function Navbar({products}) {
+function Navbar({ products, user, dispatch }) {
 
     const classes = useStyles();
+    const navigate = useNavigate();
+
+    const handleAuth = () => {
+        if (!user.email) {
+            console.log("sisisi")
+            navigate('/signin')
+        } else {
+            auth.signOut();
+            dispatch(setCurrentAccount({
+                email: "",
+            }));
+            dispatch(emptyBasketProduct());
+            navigate('/')
+        }
+    }
 
     return (
         <div className={classes.root}>
@@ -54,12 +76,12 @@ function Navbar({products}) {
                         </Grid>
                         <Grid item xs={12} sm={2} md={2} className={classes.center}>
                             <Typography variant="h6" color='textPrimary' component="p">
-                                Hello Guest
+                                Hello {user.email ? user.email : "Guest"}
                             </Typography>
                         </Grid>
                         <Grid item xs={6} sm={2} md={2} className={classes.center}>
-                            <Button variant='outlined'>
-                                <strong>Sign In</strong>
+                            <Button variant='outlined' onClick={() => handleAuth()}>
+                                <strong>{user.email ? "Sign Out" : "Sign In"}</strong>
                             </Button>
                         </Grid>
                         <Grid item xs={6} sm={1} md={1} className={classes.center}>
@@ -75,12 +97,13 @@ function Navbar({products}) {
                 </Toolbar>
             </AppBar>
 
-        </div>
+        </div >
     )
 }
 
 const mapStateToProps = (state) => ({
     products: state.basketProductsReducer.products,
+    user: state.userReducer.user,
     loading: state.basketProductsReducer.loading,
     hasErrors: state.basketProductsReducer.hasErrors,
     redirect: state.basketProductsReducer.redirect,

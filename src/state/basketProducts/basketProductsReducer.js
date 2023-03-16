@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addBasketProduct, deleteBasketProduct, getBasketProducts, setBasketProductTotal } from "../../thunkAction/basketProductsThunk";
+import { addBasketProduct, deleteBasketProduct, emptyBasketProduct, getBasketProducts, setBasketProductTotal } from "../../thunkAction/basketProductsThunk";
 
 export const initialState = {
     products: [],
@@ -43,6 +43,9 @@ export const basketProductsReducer = createSlice({
         })
         builder.addCase(setBasketProductTotal.fulfilled, (state) => {
             state.total = state.products.reduce((acumulator, actual) => acumulator + actual.price, 0);
+        })
+        builder.addCase(emptyBasketProduct.fulfilled, (state) => {
+            state.products = [];
         })
     }
 })
